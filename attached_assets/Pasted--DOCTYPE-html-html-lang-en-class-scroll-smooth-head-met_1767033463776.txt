@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BearBnB Reno | Luxury Sprinter Rentals & Stays</title>
+    <meta name="description" content="Hibernate in style. Roam with purpose. Luxury Mercedes-Benz Sprinter rentals and private suites in Reno, NV.">
+    
+    <!-- Fonts: Playfair Display (Luxury Headings) & Inter (Clean Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Icons (Lucide) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0f172a', // Slate 900
+                            darker: '#020617', // Slate 950
+                            green: '#2E8B57', // Sea Green (Main Accent)
+                            forest: '#2E6F40', // Forest Green (Darker Accent for Gradients)
+                            sage: '#8FBC8F', // Sage (Lighter Accent)
+                            gray: '#94a3b8',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    backgroundImage: {
+                        'hero-gradient': 'linear-gradient(to bottom, rgba(2,6,23,0.3), rgba(2,6,23,0.8))',
+                    },
+                    boxShadow: {
+                        'lux': '0 10px 15px -3px rgba(46, 139, 87, 0.3), 0 4px 6px -2px rgba(46, 139, 87, 0.1)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1s ease-out, transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Smooth image hover zoom */
+        .img-zoom-container {
+            overflow: hidden;
+        }
+        .img-zoom {
+            transition: transform 0.7s ease;
+        }
+        .img-zoom-container:hover .img-zoom {
+            transform: scale(1.05);
+        }
+
+        /* 3D Button Style */
+        .btn-lux {
+            background: linear-gradient(180deg, #2E8B57 0%, #2E6F40 100%);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.3);
+            border: 1px solid #1a4428;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        
+        .btn-lux:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(46, 139, 87, 0.4), inset 0 1px 0 rgba(255,255,255,0.3);
+            filter: brightness(1.1);
+        }
+
+        .btn-lux:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3), inset 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        /* Glassmorphism for cards */
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-brand-darker text-white antialiased selection:bg-brand-green selection:text-white">
+
+    <!-- Navigation -->
+    <header id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6 px-6 lg:px-12 bg-gradient-to-b from-brand-darker/90 to-transparent backdrop-blur-sm border-b border-white/5">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            
+            <!-- Logo SVG -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-12 h-12 text-brand-green transition-transform group-hover:scale-110 duration-500 drop-shadow-[0_0_8px_rgba(46,139,87,0.5)]">
+                    <!-- Custom SVG Logo: Mountain with Negative Space -->
+                    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="48" stroke="currentColor" stroke-width="2"/>
+                        <!-- The Mountain Shape -->
+                        <path d="M50 20L85 80H15L50 20Z" fill="currentColor"/>
+                        <!-- The Negative Space Path (River/Path) -->
+                        <path d="M50 25L55 45L45 55L52 70L48 80" stroke="#020617" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-serif text-xl font-bold tracking-wider leading-none text-white">BearBnB</span>
+                    <span class="text-[10px] uppercase tracking-[0.2em] text-brand-gray">Reno, NV</span>
+                </div>
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium tracking-wide text-gray-300">
+                <a href="#about" class="hover:text-brand-green transition-colors">The Experience</a>
+                <a href="#van" class="hover:text-brand-green transition-colors">The Van</a>
+                <a href="#stay" class="hover:text-brand-green transition-colors">The Suite</a>
+                
+                <!-- CTA Button -->
+                <a href="https://www.outdoorsy.com/rv-rental/reno_nv/2012_mercedes-benz_sprinter_434747-listing" target="_blank" class="btn-lux text-white px-6 py-3 rounded-full font-semibold">
+                    Book Adventure
+                </a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-white hover:text-brand-green">
+                <i data-lucide="menu" class="w-8 h-8"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-brand-darker z-40 transform translate-x-full transition-transform duration-300 flex flex-col justify-center items-center gap-8 md:hidden">
+        <button id="close-menu-btn" class="absolute top-8 right-8 text-white hover:text-brand-green">
+            <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+        <a href="#about" class="text-2xl font-serif hover:text-brand-green mobile-link">The Experience</a>
+        <a href="#van" class="text-2xl font-serif hover:text-brand-green mobile-link">The Van</a>
+        <a href="#stay" class="text-2xl font-serif hover:text-brand-green mobile-link">The Suite</a>
+        <a href="https://www.outdoorsy.com/rv-rental/reno_nv/2012_mercedes-benz_sprinter_434747-listing" target="_blank" class="bg-brand-green text-white px-8 py-4 rounded-full font-bold text-xl">Book Now</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+        <!-- Background Image -->
+        <!-- REPLACE 'https://images.unsplash.com/photo-1528154130836-368c3d0cb143?q=80&w=2966&auto=format&fit=crop' WITH YOUR FILE 'hero-van.jpg' -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1528154130836-368c3d0cb143?q=80&w=2966&auto=format&fit=crop" 
+                 alt="Luxury Mercedes Sprinter Van in the High Sierra" 
+                 class="w-full h-full object-cover opacity-80 scale-105 animate-[pulse_10s_ease-in-out_infinite]">
+        </div>
+        
+        <!-- Gradient Overlay -->
+        <div class="absolute inset-0 bg-hero-gradient z-10"></div>
+
+        <!-- Content -->
+        <div class="relative z-20 text-center px-4 max-w-5xl mx-auto mt-16">
+            <span class="reveal inline-block text-brand-sage uppercase tracking-[0.3em] text-sm md:text-base mb-6 font-medium bg-brand-green/20 px-4 py-2 rounded-full border border-brand-green/30 backdrop-blur-md">Hibernate in Style. Roam with Purpose.</span>
+            <h1 class="reveal font-serif text-5xl md:text-7xl lg:text-8xl font-bold leading-tight mb-8 text-white drop-shadow-2xl">
+                Unleash Your <br/>
+                <span class="italic text-transparent bg-clip-text bg-gradient-to-r from-brand-sage to-brand-green">Reno Adventure.</span>
+            </h1>
+            <p class="reveal max-w-2xl mx-auto text-gray-200 text-lg md:text-xl mb-10 font-light leading-relaxed drop-shadow-md">
+                The ultimate High Sierra basecamp. Luxury Mercedes-Benz Sprinter rentals and private suites, perfectly positioned for your Tahoe escape.
+            </p>
+            <div class="reveal flex flex-col md:flex-row gap-6 justify-center items-center">
+                <a href="https://www.outdoorsy.com/rv-rental/reno_nv/2012_mercedes-benz_sprinter_434747-listing" target="_blank" class="btn-lux text-white px-10 py-4 rounded-full font-bold text-lg">
+                    Check Availability
+                </a>
+                <a href="#van" class="text-white border border-white/30 px-10 py-4 rounded-full font-medium hover:bg-white/10 transition-all duration-300 backdrop-blur-sm hover:border-white/60">
+                    Explore The Van
+                </a>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce z-20 text-white/50">
+            <i data-lucide="arrow-down" class="w-6 h-6"></i>
+        </div>
+    </section>
+
+    <!-- Concept Section (About) -->
+    <section id="about" class="py-24 px-6 md:px-12 bg-brand-darker relative">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="reveal order-2 lg:order-1">
+                <div class="w-16 h-[2px] bg-gradient-to-r from-brand-green to-transparent mb-8"></div>
+                <h2 class="font-serif text-4xl md:text-5xl mb-8 leading-tight text-white">
+                    Rest & Roam <br>
+                    <span class="text-brand-sage italic">The BearBnB Way.</span>
+                </h2>
+                <p class="text-gray-400 text-lg leading-relaxed mb-6">
+                    We believe the best adventures require two things: the capability to go anywhere, and a sanctuary to recover. 
+                </p>
+                <p class="text-gray-400 text-lg leading-relaxed mb-10">
+                    Most rentals force you to choose between a hotel and the wild. We offer both. Start your journey in our private "Bear Den" suite to stage your gear, then take the keys to "The Beast"—our fully outfitted Sprinter—and disappear into the mountains.
+                </p>
+                <ul class="space-y-4 mb-8">
+                    <li class="flex items-center gap-3 text-gray-300">
+                        <div class="bg-brand-green/20 p-1 rounded-full"><i data-lucide="check" class="text-brand-green w-4 h-4"></i></div>
+                        <span>Seamless transition from flight to trail</span>
+                    </li>
+                    <li class="flex items-center gap-3 text-gray-300">
+                        <div class="bg-brand-green/20 p-1 rounded-full"><i data-lucide="check" class="text-brand-green w-4 h-4"></i></div>
+                        <span>No gear rental logistics—we have it all</span>
+                    </li>
+                    <li class="flex items-center gap-3 text-gray-300">
+                        <div class="bg-brand-green/20 p-1 rounded-full"><i data-lucide="check" class="text-brand-green w-4 h-4"></i></div>
+                        <span>Locally owned & operated in Reno, NV</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="reveal order-1 lg:order-2 relative img-zoom-container rounded-2xl overflow-hidden shadow-2xl border border-white/5">
+                 <!-- Placeholder for interior shot -->
+                <img src="https://images.unsplash.com/photo-1627252204940-d99f92e850b9?q=80&w=2970&auto=format&fit=crop" alt="Cozy Van Interior" class="img-zoom w-full h-[600px] object-cover">
+                <div class="absolute bottom-0 left-0 p-8 bg-gradient-to-t from-black/90 to-transparent w-full">
+                    <div class="text-brand-sage font-serif text-2xl italic">"The perfect basecamp."</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Van Section -->
+    <section id="van" class="py-24 px-6 md:px-12 bg-brand-dark text-white relative">
+        <!-- Background decoration -->
+        <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-brand-green/5 to-transparent pointer-events-none"></div>
+
+        <div class="max-w-6xl mx-auto relative z-10">
+            <div class="text-center mb-16 reveal">
+                <span class="text-brand-green uppercase tracking-widest text-sm font-bold bg-brand-green/10 px-3 py-1 rounded">The Vehicle</span>
+                <h2 class="font-serif text-4xl md:text-6xl mt-6 mb-6">Luxury Meets Utility</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto text-lg">
+                    A 2012 Mercedes-Benz Sprinter 170". Built for the deep snow of Tahoe and the dusty trails of the high desert.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                <!-- Feature 1 -->
+                <div class="reveal glass-panel p-10 rounded-2xl hover:border-brand-green/30 transition-all group hover:-translate-y-2">
+                    <div class="bg-gradient-to-br from-brand-green to-brand-forest w-16 h-16 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-brand-green/20 group-hover:scale-110 transition-transform">
+                        <i data-lucide="snowflake" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl mb-4 text-white">Winter Ready</h3>
+                    <p class="text-gray-400 leading-relaxed">Equipped with all-terrain tires and a high-efficiency diesel heater to keep you toasty in sub-zero temps.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="reveal glass-panel p-10 rounded-2xl hover:border-brand-green/30 transition-all group hover:-translate-y-2" style="transition-delay: 200ms;">
+                    <div class="bg-gradient-to-br from-brand-green to-brand-forest w-16 h-16 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-brand-green/20 group-hover:scale-110 transition-transform">
+                        <i data-lucide="coffee" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl mb-4 text-white">Fully Stocked</h3>
+                    <p class="text-gray-400 leading-relaxed">Queen memory foam bed, induction cooktop, fridge, solar power, and premium linens. Just bring your clothes and food.</p>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center reveal">
+                 <a href="https://www.outdoorsy.com/rv-rental/reno_nv/2012_mercedes-benz_sprinter_434747-listing" target="_blank" class="inline-flex items-center gap-2 text-brand-green hover:text-brand-sage transition-colors border-b border-brand-green pb-1 text-lg group">
+                    View Full Specs on Outdoorsy <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Grid / Vibe Section -->
+    <section class="py-0 border-y border-white/5">
+        <div class="grid grid-cols-1 md:grid-cols-4 h-auto md:h-[500px]">
+            <div class="img-zoom-container h-64 md:h-full relative overflow-hidden group">
+                <img src="https://images.unsplash.com/photo-1516939884455-1445c8652f83?q=80&w=2787&auto=format&fit=crop" class="img-zoom w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" alt="Mountain View">
+            </div>
+            <div class="img-zoom-container h-64 md:h-full relative overflow-hidden group">
+                 <img src="https://images.unsplash.com/photo-1517814421295-886d34e9e033?q=80&w=2890&auto=format&fit=crop" class="img-zoom w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" alt="Van Life Interior">
+            </div>
+            <div class="img-zoom-container h-64 md:h-full relative overflow-hidden group">
+                <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2940&auto=format&fit=crop" class="img-zoom w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" alt="Sierra Mountains">
+            </div>
+             <div class="img-zoom-container h-64 md:h-full bg-brand-darker flex items-center justify-center p-8 text-center group border-l border-white/5">
+                 <div class="group-hover:scale-105 transition-transform duration-300">
+                    <div class="w-16 h-16 bg-gradient-to-br from-brand-green to-brand-forest rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg shadow-brand-green/20">
+                        <i data-lucide="instagram" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <h3 class="font-serif text-white text-2xl font-bold mb-2">Follow the Bear</h3>
+                    <p class="text-gray-400 mb-4">See our latest adventures</p>
+                    <span class="text-brand-green font-bold tracking-wide">@BearBnBReno</span>
+                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Apartment Section (Brief) -->
+    <section id="stay" class="py-24 px-6 bg-brand-darker relative overflow-hidden">
+        <!-- Animated glow effect -->
+        <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-green/5 rounded-full blur-[100px] animate-pulse"></div>
+        
+        <div class="max-w-4xl mx-auto text-center relative z-10 reveal">
+            <h2 class="font-serif text-4xl md:text-5xl mb-6">The "Bear Den" Suite</h2>
+            <p class="text-gray-400 text-lg mb-10 max-w-2xl mx-auto">
+                Need a place to crash before or after your rental? Our attached private apartment offers a modern bathroom, kitchenette, and high-speed WiFi. It's the perfect decompression chamber.
+            </p>
+            <button class="border border-brand-gray/50 text-white px-8 py-3 rounded-full hover:bg-white hover:text-brand-darker transition-all duration-300 hover:border-white">
+                Inquire About The Suite
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-16 px-6 border-t border-white/10">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            
+            <div class="flex flex-col items-center md:items-start">
+                 <div class="flex items-center gap-2 mb-4 text-brand-green">
+                    <!-- Footer Logo (Simplified) -->
+                    <svg viewBox="0 0 100 100" class="w-8 h-8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="48" stroke="currentColor" stroke-width="2"/>
+                        <path d="M50 20L85 80H15L50 20Z" fill="currentColor"/>
+                        <path d="M50 25L55 45L45 55L52 70L48 80" stroke="#000" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
+                    <span class="font-serif text-2xl text-white">BearBnB</span>
+                </div>
+                <p class="text-gray-500 text-sm max-w-xs text-center md:text-left">
+                    Luxury Sprinter Rentals & Private Stays in the Heart of the High Sierra.
+                </p>
+            </div>
+
+            <div class="flex gap-8 text-sm text-gray-400">
+                <a href="#" class="hover:text-brand-green transition-colors">Home</a>
+                <a href="https://www.outdoorsy.com/rv-rental/reno_nv/2012_mercedes-benz_sprinter_434747-listing" class="hover:text-brand-green transition-colors">Book Now</a>
+                <a href="#" class="hover:text-brand-green transition-colors">Contact</a>
+            </div>
+
+            <div class="flex flex-col items-center md:items-end">
+                <a href="https://www.outdoorsy.com/rv-rental/reno_nv/2012_mercedes-benz_sprinter_434747-listing" target="_blank" class="btn-lux text-white px-6 py-2 rounded-md font-bold text-sm mb-2">
+                    Rent on Outdoorsy
+                </a>
+                <span class="text-xs text-gray-600">© 2024 BearBnB Reno. All rights reserved.</span>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- Scripts for Interactivity -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Scroll Animation Observer (Improved)
+        const observerOptions = {
+            threshold: 0.1, // Trigger when 10% of item is visible
+            rootMargin: "0px 0px -50px 0px" // Trigger slightly before it hits bottom of screen
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    // Stop observing once activated to improve performance
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Add reveal class to items on load to ensure script catches them
+        document.addEventListener('DOMContentLoaded', () => {
+             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        });
+
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const closeMenuBtn = document.getElementById('close-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        function toggleMenu() {
+            mobileMenu.classList.toggle('translate-x-full');
+            document.body.classList.toggle('overflow-hidden');
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMenu);
+        closeMenuBtn.addEventListener('click', toggleMenu);
+        
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', toggleMenu);
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-brand-darker', 'shadow-lg');
+                navbar.classList.remove('bg-gradient-to-b');
+            } else {
+                navbar.classList.remove('bg-brand-darker', 'shadow-lg');
+                navbar.classList.add('bg-gradient-to-b');
+            }
+        });
+    </script>
+</body>
+</html>
