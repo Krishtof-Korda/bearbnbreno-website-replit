@@ -3,8 +3,6 @@ import { Link } from "wouter";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-import logoImage from "@assets/BearBnBReno_1767033698226.png";
-
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -37,11 +35,26 @@ export function Navbar() {
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           {/* Logo */}
           <a href="#" className="flex items-center gap-3 group cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            <img 
-              src={logoImage} 
-              alt="BearBnB Reno Logo" 
-              className="h-10 md:h-12 w-auto brightness-0 invert transition-transform group-hover:scale-105 duration-300" 
-            />
+            <div className="w-12 h-12 text-brand-green transition-transform group-hover:scale-110 duration-500 drop-shadow-[0_0_8px_rgba(46,139,87,0.5)]">
+              <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="48" stroke="currentColor" strokeWidth="2" />
+                <path d="M50 20L85 80H15L50 20Z" fill="currentColor" />
+                <path
+                  d="M50 25L55 45L45 55L52 70L48 80"
+                  stroke="#020617"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </div>
+            <div className="flex flex-col">
+              <span className="font-serif text-xl font-bold tracking-wider leading-none text-white">
+                BearBnB
+              </span>
+              <span className="text-[10px] uppercase tracking-[0.2em] text-brand-gray">
+                Reno, NV
+              </span>
+            </div>
           </a>
 
           {/* Desktop Menu */}

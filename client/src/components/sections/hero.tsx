@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
-
-const heroImageUrl = "/attached_assets/IMG_1016_1767033713294.HEIC";
+import heroImage from "@assets/stock_images/luxury_mercedes_spri_f4baf47f.jpg";
 
 export function Hero() {
   const scrollToAbout = () => {
@@ -22,7 +21,7 @@ export function Hero() {
             className="w-full h-full"
         >
             <img
-            src={heroImageUrl}
+            src={heroImage}
             alt="Luxury Mercedes Sprinter Van in the High Sierra"
             className="w-full h-full object-cover opacity-80"
             />
